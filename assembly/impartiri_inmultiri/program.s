@@ -55,7 +55,7 @@ main:
 	# dau breakpoint in gdb aici si ma uit la edx si eax:
 	# eax are -20 = 0xffffffec
 	# edx are   1 = 0x00000001
-	# Stim din teorie catul final al inmultirii se obitine
+	# Stim din teorie catul final al inmultirii se obtine
 	# prin concatenarea registrilor %edx si %eax deci:
 	# (%edx:%eax) = 0x00000001ffffffec = 8589934572 => un numar la care
 	# nu ne asteptam cu inmultirea noastra initiala: -20 * 2
@@ -121,7 +121,7 @@ main:
 	# (si ca a compilat in primul rand)
 	# de ce restul e negativ??
 	# pentru ca pastreaza semnul deimparitului
-	# astfel verifica proprietatea: deimp = cat * divizor + rest
+	# astfel verifica proprietatea: deimp = cat * impartitor + rest
 	# -11 = -5 * 2 + (-1) <=>
 	# -11 = -10 - 1 => Adevarat
     
