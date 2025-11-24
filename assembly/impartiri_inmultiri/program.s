@@ -27,6 +27,8 @@ main:
     # 2. ======= IMPARTIRE CU REST =======
     
     xorl %edx, %edx
+
+	movl $2, %edx
     
     # aici deja aveam 0 in edx dar e bine ca inainte de o 
     # impartire sa ma asigur ca am 0 in el ca sa nu impart ce nu
@@ -36,7 +38,7 @@ main:
     # de aceea se foloseste mai des in practica
     
 	incl %eax # adaug 1 in eax => eax = 61
-	movl $2, %ebx
+	movl $2000, %ebx
 	divl %ebx
 	
 	bpt2: 
