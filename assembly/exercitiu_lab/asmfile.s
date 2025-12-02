@@ -1,7 +1,9 @@
 # suma divizorilor unui numar = numar
 .data
 
-n: .long 12
+v: .long 12, 28, 6, 9
+n: .long 4
+cnt: .long 0
 printnu: .asciz "%d nu este perfect"
 printda: .asciz "este perfect\n"
 
@@ -11,7 +13,10 @@ printda: .asciz "este perfect\n"
 perfect:
     pushl %ebp
     movl %esp, %ebp
+
     
+    pushl %ecx
+
     movl $1, %ecx
     xorl %ebx, %ebx
 
@@ -46,6 +51,7 @@ et_egale:
     
 exit_functie:
     #in %eax tine bool-ul
+    popl %ecx
     popl %ebp
     ret
 
@@ -53,32 +59,38 @@ exit_functie:
 
 main:
 
-pushl n
-call perfect
-#addl $4, %esp
-popl n
-#eax tine 0 sau 1 in functie de n, daca e perfect
-cmp $0, %eax
-je print_nu
+    xorl %ecx, %ecx 
+    lea v, %edi 
 
-pushl $printda
-call printf
-addl $4, %esp
+    parcurgere_vector:
+        cmp %ecx, n
+        je et_exit
 
-jmp et_exit
+        movl (%edi, %ecx, 4), %eax
 
-print_nu:
+        pushl %eax
+        call perfect
+        addl $4, %esp
 
-pushl n
-pushl $printnu
-call printf
-addl $8, %esp
+        cmp $1, %eax
+        je creste_cnt
+        jmp continua
 
-pushl $0
-call fflush
-addl $4, %esp
+        creste_cnt:
+            movl cnt, %edx 
+            addl $1, %edx
+            movl %edx, cnt
+        
+        continua:
+        addl $1, %ecx
+        jmp parcurgere_vector
+
+
 
 et_exit:
+
+    movl cnt, %edx
+
     mov $1, %eax
     mov $0, %ebx
     int $0x80
